@@ -1,0 +1,11 @@
+{
+  "name": "慢薪 · 摸鱼记薪",
+  "short_name": "慢薪",
+  "description": "让每一秒上班时间，都变成看得见的收益。",
+  "start_url": "/slowpay/",
+  "scope": "/slowpay/",
+  "display": "standalone",
+  "background_color": "#f2f5f8",
+  "theme_color": "#f2f5f8",
+  "icons": [{ "src": "/slowpay/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
