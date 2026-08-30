@@ -1,5 +1,5 @@
-const CACHE = 'slowpay-pages-v1';
-const CORE = ['/slowpay/', '/slowpay/manifest.webmanifest', '/slowpay/icon.svg'];
+const CACHE = 'slowpay-pages-v2';
+const CORE = ['/slowpay/', '/slowpay/manifest.webmanifest', '/slowpay/app-icon-192.png'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)));
