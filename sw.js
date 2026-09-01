@@ -1,4 +1,4 @@
-const CACHE = 'slowpay-pages-v2';
+const CACHE = 'slowpay-pages-v3';
 const CORE = ['/slowpay/', '/slowpay/manifest.webmanifest', '/slowpay/app-icon-192.png'];
 
 self.addEventListener('install', (event) => {
