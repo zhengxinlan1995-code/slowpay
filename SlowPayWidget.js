@@ -89,7 +89,7 @@ function money(amount) {
 
 function addText(stack, value, size, color, weight = 'regular') {
   const text = stack.addText(value)
-  text.font = weight === 'bold' ? Font.boldSystemFont(size) : Font.systemFont(size)
+  text.font = weight === 'bold' ? Font.boldRoundedSystemFont(size) : Font.regularRoundedSystemFont(size)
   text.textColor = new Color(color)
   return text
 }
@@ -105,7 +105,7 @@ function makeWidget(settings) {
   widget.url = APP_URL
   widget.setPadding(15, 15, 15, 15)
   widget.backgroundGradient = new LinearGradient()
-  widget.backgroundGradient.colors = [new Color('#17283A'), new Color('#12342F')]
+  widget.backgroundGradient.colors = [new Color('#EEEED8'), new Color('#D9E2C5')]
   widget.backgroundGradient.locations = [0, 1]
 
   const header = widget.addStack()
@@ -113,31 +113,31 @@ function makeWidget(settings) {
   const symbol = SFSymbol.named('fish.fill').image
   const fish = header.addImage(symbol)
   fish.imageSize = new Size(14, 14)
-  fish.tintColor = new Color('#9FE7D2')
+  fish.tintColor = new Color('#285842')
   header.addSpacer(6)
-  addText(header, '慢薪', 12, '#EAF7F3', 'bold')
+  addText(header, '慢薪 · 慢慢升值', 12, '#263B2D', 'bold')
   header.addSpacer()
-  addText(header, `${now.getMonth() + 1}月 · ${workdays}个工作日`, 9, '#8CA5A3')
+  addText(header, `${now.getMonth() + 1}月 · ${workdays}个工作日`, 9, '#617063')
 
   widget.addSpacer(13)
-  addText(widget, money(earned), config.widgetFamily === 'small' ? 27 : 31, '#F3F8F6', 'bold')
-  const subtitle = addText(widget, isWorkday(now) ? `今日到账 · ${money(hourly)}/小时` : '今天休息，工资也要喘口气', 10, '#9FB4B0')
+  addText(widget, money(earned), config.widgetFamily === 'small' ? 27 : 31, '#202B27', 'bold')
+  const subtitle = addText(widget, isWorkday(now) ? `今日到账 · ${money(hourly)}/小时` : '今天休息，工资也要喘口气', 10, '#647064')
   subtitle.lineLimit = 1
 
   widget.addSpacer()
   const action = widget.addStack()
   action.url = APP_URL
   action.centerAlignContent()
-  action.backgroundColor = new Color('#9FE7D2')
+  action.backgroundColor = new Color('#285842')
   action.cornerRadius = 13
   action.setPadding(9, 11, 9, 11)
   const coffee = action.addImage(SFSymbol.named('cup.and.saucer.fill').image)
   coffee.imageSize = new Size(13, 13)
-  coffee.tintColor = new Color('#173B36')
+  coffee.tintColor = new Color('#FFF4D3')
   action.addSpacer(6)
-  addText(action, '开始摸鱼', 12, '#173B36', 'bold')
+  addText(action, '开始摸鱼', 12, '#FFF4D3', 'bold')
   action.addSpacer()
-  addText(action, '↗', 12, '#173B36', 'bold')
+  addText(action, '↗', 12, '#FFF4D3', 'bold')
   return widget
 }
 
