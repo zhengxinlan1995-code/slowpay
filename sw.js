@@ -1,5 +1,12 @@
-const CACHE = 'slowpay-pages-v4';
-const CORE = ['/slowpay/', '/slowpay/manifest.webmanifest', '/slowpay/app-icon-192.png', '/slowpay/cat-books.webp'];
+const CACHE = 'slowpay-pages-v5';
+const CORE = [
+  '/slowpay/', '/slowpay/manifest.webmanifest', '/slowpay/app-icon-192.png', '/slowpay/cat-books.webp',
+  '/slowpay/doodles/money.webp', '/slowpay/doodles/clock.webp', '/slowpay/doodles/calendar.webp',
+  '/slowpay/doodles/slack.webp', '/slowpay/doodles/wish.webp', '/slowpay/doodles/history.webp',
+  '/slowpay/doodles/settings.webp', '/slowpay/doodles/sparkles.webp', '/slowpay/doodles/earning.webp',
+  '/slowpay/doodles/texture-forest.webp', '/slowpay/doodles/texture-cream.webp',
+  '/slowpay/doodles/texture-mustard.webp', '/slowpay/doodles/texture-sage.webp',
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)));
