@@ -1,4 +1,4 @@
-const CACHE = 'slowpay-pages-v5';
+const CACHE = 'slowpay-pages-v6';
 const CORE = [
   '/slowpay/', '/slowpay/manifest.webmanifest', '/slowpay/app-icon-192.png', '/slowpay/cat-books.webp',
   '/slowpay/doodles/money.webp', '/slowpay/doodles/clock.webp', '/slowpay/doodles/calendar.webp',
