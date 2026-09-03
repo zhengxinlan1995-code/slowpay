@@ -2,6 +2,7 @@
 // 安装：将本文件放入 iCloud Drive/Scriptable，然后在桌面添加 Scriptable 小组件并选择本脚本。
 
 const APP_URL = 'https://zhengxinlan1995-code.github.io/slowpay/?action=start-slack'
+const ART_URL = 'https://zhengxinlan1995-code.github.io/slowpay/widget-crayon-bg.webp?v=2'
 const STORE_KEY = 'slowpay-widget-settings-v1'
 
 const holidayDates = new Set([
@@ -94,7 +95,15 @@ function addText(stack, value, size, color, weight = 'regular') {
   return text
 }
 
-function makeWidget(settings) {
+async function loadArtwork() {
+  try {
+    return await new Request(ART_URL).loadImage()
+  } catch {
+    return null
+  }
+}
+
+async function makeWidget(settings) {
   const now = new Date()
   const workdays = monthWorkdays(now)
   const daily = settings.salary / Math.max(1, workdays)
@@ -103,24 +112,31 @@ function makeWidget(settings) {
   const hourly = daily / (workingMinutes / 60)
   const widget = new ListWidget()
   widget.url = APP_URL
-  widget.setPadding(15, 15, 15, 15)
-  widget.backgroundGradient = new LinearGradient()
-  widget.backgroundGradient.colors = [new Color('#EEEED8'), new Color('#D9E2C5')]
-  widget.backgroundGradient.locations = [0, 1]
+  widget.refreshAfterDate = new Date(Date.now() + 5 * 60 * 1000)
+  widget.setPadding(14, 15, 14, 15)
+  const artwork = await loadArtwork()
+  if (artwork) {
+    widget.backgroundImage = artwork
+  } else {
+    widget.backgroundGradient = new LinearGradient()
+    widget.backgroundGradient.colors = [new Color('#F5F0DF'), new Color('#DDE5CF')]
+    widget.backgroundGradient.locations = [0, 1]
+  }
 
   const header = widget.addStack()
   header.centerAlignContent()
+  header.backgroundColor = new Color('#F8F2DD', 0.82)
+  header.cornerRadius = 9
+  header.setPadding(4, 7, 4, 7)
   const symbol = SFSymbol.named('fish.fill').image
   const fish = header.addImage(symbol)
-  fish.imageSize = new Size(14, 14)
+  fish.imageSize = new Size(13, 13)
   fish.tintColor = new Color('#285842')
-  header.addSpacer(6)
-  addText(header, '慢薪 · 慢慢升值', 12, '#263B2D', 'bold')
-  header.addSpacer()
-  addText(header, `${now.getMonth() + 1}月 · ${workdays}个工作日`, 9, '#617063')
+  header.addSpacer(5)
+  addText(header, '慢薪 · 摸鱼记薪', 11, '#263B2D', 'bold')
 
-  widget.addSpacer(13)
-  addText(widget, money(earned), config.widgetFamily === 'small' ? 27 : 31, '#202B27', 'bold')
+  widget.addSpacer(9)
+  addText(widget, money(earned), config.widgetFamily === 'small' ? 25 : 30, '#20342A', 'bold')
   const subtitle = addText(widget, isWorkday(now) ? `今日到账 · ${money(hourly)}/小时` : '今天休息，工资也要喘口气', 10, '#647064')
   subtitle.lineLimit = 1
 
@@ -128,16 +144,14 @@ function makeWidget(settings) {
   const action = widget.addStack()
   action.url = APP_URL
   action.centerAlignContent()
-  action.backgroundColor = new Color('#285842')
-  action.cornerRadius = 13
-  action.setPadding(9, 11, 9, 11)
+  action.backgroundColor = new Color('#E7C75E')
+  action.cornerRadius = 12
+  action.setPadding(8, 11, 8, 11)
   const coffee = action.addImage(SFSymbol.named('cup.and.saucer.fill').image)
-  coffee.imageSize = new Size(13, 13)
-  coffee.tintColor = new Color('#FFF4D3')
+  coffee.imageSize = new Size(12, 12)
+  coffee.tintColor = new Color('#234735')
   action.addSpacer(6)
-  addText(action, '开始摸鱼', 12, '#FFF4D3', 'bold')
-  action.addSpacer()
-  addText(action, '↗', 12, '#FFF4D3', 'bold')
+  addText(action, '开始摸鱼  ↗', 11, '#234735', 'bold')
   return widget
 }
 
@@ -152,7 +166,7 @@ if (!config.runsInWidget) {
   if (choice === 1) settings = await editSettings(settings)
 }
 
-const widget = makeWidget(settings)
+const widget = await makeWidget(settings)
 if (config.runsInWidget) Script.setWidget(widget)
 else await widget.presentMedium()
 Script.complete()

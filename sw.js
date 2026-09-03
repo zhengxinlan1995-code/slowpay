@@ -1,4 +1,4 @@
-const CACHE = 'slowpay-pages-v7';
+const CACHE = 'slowpay-pages-v8';
 const CORE = [
   '/slowpay/', '/slowpay/manifest.webmanifest', '/slowpay/app-icon-192.png', '/slowpay/cat-books.webp',
   '/slowpay/doodles/money.webp', '/slowpay/doodles/clock.webp', '/slowpay/doodles/calendar.webp',
@@ -6,6 +6,11 @@ const CORE = [
   '/slowpay/doodles/settings.webp', '/slowpay/doodles/sparkles.webp', '/slowpay/doodles/earning.webp',
   '/slowpay/doodles/texture-forest.webp', '/slowpay/doodles/texture-cream.webp',
   '/slowpay/doodles/texture-mustard.webp', '/slowpay/doodles/texture-sage.webp',
+  '/slowpay/doodles/items/coffee.webp', '/slowpay/doodles/items/boba.webp', '/slowpay/doodles/items/ramen.webp',
+  '/slowpay/doodles/items/cake.webp', '/slowpay/doodles/items/sushi.webp', '/slowpay/doodles/items/phone.webp',
+  '/slowpay/doodles/items/headphones.webp', '/slowpay/doodles/items/laptop.webp', '/slowpay/doodles/items/controller.webp',
+  '/slowpay/doodles/items/book.webp', '/slowpay/doodles/items/sneakers.webp', '/slowpay/doodles/items/flowers.webp',
+  '/slowpay/widget-crayon-bg.webp',
 ];
 
 self.addEventListener('install', (event) => {
